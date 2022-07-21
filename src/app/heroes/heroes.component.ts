@@ -10,6 +10,7 @@ import { MessageService } from '../message.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
+  confirmar: string;
 
   constructor(private heroService: HeroService) {}
 
@@ -32,7 +33,10 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter((h) => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.confirmar = `¿Seguro que desea eliminar a ${hero.name}?`;
+    if (confirm(this.confirmar)) {
+      this.heroes = this.heroes.filter((h) => h !== hero);
+      this.heroService.deleteHero(hero).subscribe();
+    }
   }
 }

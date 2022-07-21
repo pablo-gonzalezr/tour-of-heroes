@@ -1,0 +1,9 @@
+@media (max-width: 575px){
+    .margin-mobile{
+        margin: 10px 0 10px 0;
+    }
+}
+
+.background-nav{
+    background-color: #eee;
+}
