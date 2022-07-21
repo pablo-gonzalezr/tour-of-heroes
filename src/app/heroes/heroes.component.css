@@ -12,3 +12,9 @@
   max-width: 50px;
   max-height: 50px;
 }
+
+.button-width{
+  width: 20%;
+  text-align: initial;
+  word-break: break-all;
+}
