@@ -11,27 +11,36 @@
     </button>
   </div>
 </div>
-<div class="w-75 m-auto">
-  <ul class="list-group">
-    <li *ngFor="let hero of heroes" class="list-group-item align-items-center">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Placeholder_couple_superhero.png"
-        alt="imagen heroe"
-        class="me-3 image-size"
-      />
-      <a
-        routerLink="/detail/{{ hero.id }}"
-        class="me-3 btn btn-outline-secondary button-width"
-      >
-        {{ hero.id }} - {{ hero.name }}
-      </a>
-      <button
-        class="btn btn-danger float-right"
-        title="delete hero"
-        (click)="delete(hero)"
-      >
-        Eliminar
-      </button>
-    </li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-3" *ngFor="let hero of heroes">
+      <div class="card my-3 m-auto" style="width: 18rem">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Placeholder_couple_superhero.png"
+          class="card-img-top"
+          alt="imágen de heroes o heroína"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ hero.id }} - {{ hero.name }}</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a
+            routerLink="/detail/{{ hero.id }}"
+            class="btn btn-outline-primary btn-detalle"
+          >
+            Detalles
+          </a>
+          <button
+            class="btn btn-danger float-right"
+            title="delete hero"
+            (click)="delete(hero)"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
