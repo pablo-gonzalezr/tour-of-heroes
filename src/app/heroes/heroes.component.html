@@ -1,25 +1,16 @@
 <div class="text-center mt-4">
   <h2>Mis Heroes</h2>
   <div class="my-4 m-auto new-hero-box" [hidden]="submitted">
-    <form
-      #heroForm="ngForm"
-      (ngSubmit)="
-        newHero(
-          heroForm.value.name,
-          heroForm.value.alterEgo,
-          heroForm.value.power
-        )
-      "
-    >
+    <form #heroForm="ngForm" (ngSubmit)="newHero()">
       <div class="form-group">
-        <label for="name">Nombre Heroe:</label>
+        <label for="name">Name</label>
         <input
-          class="form-control"
           type="text"
+          class="form-control"
           id="name"
-          name="name"
-          [(ngModel)]="heroForm.name"
           required
+          [(ngModel)]="model.name"
+          name="name"
           #name="ngModel"
         />
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
@@ -33,7 +24,7 @@
           type="text"
           id="alterEgo"
           name="alterEgo"
-          [(ngModel)]="heroForm.alterEgo"
+          [(ngModel)]="model.alterEgo"
           required
           #alterEgo="ngModel"
         />
@@ -50,7 +41,7 @@
           id="power"
           name="power"
           class="form-select"
-          [(ngModel)]="heroForm.power"
+          [(ngModel)]="model.power"
           required
         >
           <option *ngFor="let poder of poderes" [value]="poder">
@@ -71,15 +62,15 @@
     <h2>Ha añadido el siguiente héroe:</h2>
     <div class="row">
       <div class="col-xs-3">Nombre:</div>
-      <div class="col-xs-9">{{ heroForm.name }}</div>
+      <div class="col-xs-9">{{ model.name }}</div>
     </div>
     <div class="row">
       <div class="col-xs-3">Alter Ego:</div>
-      <div class="col-xs-9">{{ heroForm.alterEgo }}</div>
+      <div class="col-xs-9">{{ model.alterEgo }}</div>
     </div>
     <div class="row">
       <div class="col-xs-3">Poder:</div>
-      <div class="col-xs-9">{{ heroForm.power }}</div>
+      <div class="col-xs-9">{{ model.power }}</div>
     </div>
     <br />
     <button

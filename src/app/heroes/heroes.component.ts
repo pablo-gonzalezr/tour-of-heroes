@@ -8,7 +8,8 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  hero: Hero;
+  //modelo!: Hero; //<- No funciona
+  model = new Hero('', '', ''); // <- Funciona
   heroes: Hero[] = [];
   poderes: string[] = [];
   confirmar: string;
@@ -29,18 +30,17 @@ export class HeroesComponent implements OnInit {
     this.heroService.getPoderes().subscribe((poder) => (this.poderes = poder));
   }
 
-  newHero(name: string, alterEgo: string, power: string): void {
+  newHero(): void {
     this.submitted = true;
-    name = name.trim();
-    alterEgo = alterEgo.trim();
-    if (!name || !alterEgo) {
-      return;
-    }
-    this.heroService
-      .addHero({ name, alterEgo, power } as Hero)
-      .subscribe((hero) => {
-        this.heroes.push(hero);
-      });
+    // name = this.model.name.trim();
+    // alterEgo = this.model.alterEgo.trim();
+    // power = this.model.power;
+    // if (!name || !alterEgo) {
+    //   return;
+    // }
+    this.heroService.addHero(this.model as Hero).subscribe((hero) => {
+      this.heroes.push(hero);
+    });
   }
 
   onSubmit() {
