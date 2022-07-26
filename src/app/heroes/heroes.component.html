@@ -1,13 +1,93 @@
 <div class="text-center mt-4">
   <h2>Mis Heroes</h2>
-  <div class="input-group my-4 m-auto new-hero-box">
-    <span class="input-group-text">Nuevo Heroe: </span>
-    <input type="text" #heroName class="form-control" />
-    <button
-      (click)="add(heroName.value); heroName.value = ''"
-      class="btn btn-outline-primary"
+  <div class="my-4 m-auto new-hero-box" [hidden]="submitted">
+    <form
+      #heroForm="ngForm"
+      (ngSubmit)="
+        newHero(
+          heroForm.value.name,
+          heroForm.value.alterEgo,
+          heroForm.value.power
+        )
+      "
     >
-      Añadir
+      <div class="form-group">
+        <label for="name">Nombre Heroe:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="heroForm.name"
+          required
+          #name="ngModel"
+        />
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          El nombre es requerido
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Alter Ego:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="alterEgo"
+          name="alterEgo"
+          [(ngModel)]="heroForm.alterEgo"
+          required
+          #alterEgo="ngModel"
+        />
+        <div
+          [hidden]="alterEgo.valid || alterEgo.pristine"
+          class="alert alert-danger"
+        >
+          El Alter Ego es requerido
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Poder:</label>
+        <select
+          id="power"
+          name="power"
+          class="form-select"
+          [(ngModel)]="heroForm.power"
+          required
+        >
+          <option *ngFor="let poder of poderes" [value]="poder">
+            {{ poder }}
+          </option>
+        </select>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success my-3"
+        [disabled]="!heroForm.form.valid"
+      >
+        Añadir
+      </button>
+    </form>
+  </div>
+  <div [hidden]="!submitted">
+    <h2>Ha añadido el siguiente héroe:</h2>
+    <div class="row">
+      <div class="col-xs-3">Nombre:</div>
+      <div class="col-xs-9">{{ heroForm.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Alter Ego:</div>
+      <div class="col-xs-9">{{ heroForm.alterEgo }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Poder:</div>
+      <div class="col-xs-9">{{ heroForm.power }}</div>
+    </div>
+    <br />
+    <button
+      type="button"
+      class="btn btn-warning"
+      (click)="submitted = false; heroForm.reset()"
+    >
+      Añadir otro
     </button>
   </div>
 </div>
@@ -22,10 +102,8 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ hero.id }} - {{ hero.name }}</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <p class="card-text">Poder: {{ hero.power }}</p>
+          <p class="card-text">Alter Ego: {{ hero.alterEgo }}</p>
           <a
             routerLink="/detail/{{ hero.id }}"
             class="btn btn-outline-primary btn-detalle"

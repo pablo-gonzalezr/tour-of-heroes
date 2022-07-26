@@ -14,6 +14,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
   private heroesUrl = 'api/heroes';
+  private poderesUrl = 'api/poderes';
 
   constructor(
     private messageService: MessageService,
@@ -24,6 +25,13 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
       tap((_) => this.log('fetched heroes')),
       catchError(this.handleError<Hero[]>('getHeroes', []))
+    );
+  }
+
+  getPoderes(): Observable<string[]> {
+    return this.http.get<string[]>(this.poderesUrl).pipe(
+      tap((_) => this.log('fetched powers')),
+      catchError(this.handleError<string[]>('getPoderes', []))
     );
   }
 

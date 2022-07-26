@@ -8,27 +8,43 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
+  hero: Hero;
   heroes: Hero[] = [];
+  poderes: string[] = [];
   confirmar: string;
+  submitted = false;
 
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
     this.getHeroes();
+    this.getPoderes();
   }
 
   getHeroes(): void {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 
-  add(name: string): void {
+  getPoderes(): void {
+    this.heroService.getPoderes().subscribe((poder) => (this.poderes = poder));
+  }
+
+  newHero(name: string, alterEgo: string, power: string): void {
+    this.submitted = true;
     name = name.trim();
-    if (!name) {
+    alterEgo = alterEgo.trim();
+    if (!name || !alterEgo) {
       return;
     }
-    this.heroService.addHero({ name } as Hero).subscribe((hero) => {
-      this.heroes.push(hero);
-    });
+    this.heroService
+      .addHero({ name, alterEgo, power } as Hero)
+      .subscribe((hero) => {
+        this.heroes.push(hero);
+      });
+  }
+
+  onSubmit() {
+    this.submitted = true;
   }
 
   delete(hero: Hero): void {
