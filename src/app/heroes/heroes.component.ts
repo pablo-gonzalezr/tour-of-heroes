@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css'],
+  styleUrls: ['./heroes.component.scss'],
 })
 export class HeroesComponent implements OnInit {
-  //modelo!: Hero; //<- No funciona
-  model = new Hero('', '', ''); // <- Funciona
+  modelo: Hero = new Hero();
   heroes: Hero[] = [];
   poderes: string[] = [];
   confirmar: string;
   submitted = false;
+  @ViewChild('heroForm') form: any;
+  display: boolean = false;
 
   constructor(private heroService: HeroService) {}
 
@@ -38,13 +39,11 @@ export class HeroesComponent implements OnInit {
     // if (!name || !alterEgo) {
     //   return;
     // }
-    this.heroService.addHero(this.model as Hero).subscribe((hero) => {
-      this.heroes.push(hero);
-    });
-  }
-
-  onSubmit() {
-    this.submitted = true;
+    if (this.form.valid) {
+      this.heroService.addHero(this.modelo as Hero).subscribe((hero) => {
+        this.heroes.push(hero);
+      });
+    }
   }
 
   delete(hero: Hero): void {
@@ -53,5 +52,9 @@ export class HeroesComponent implements OnInit {
       this.heroes = this.heroes.filter((h) => h !== hero);
       this.heroService.deleteHero(hero).subscribe();
     }
+  }
+
+  showDialog() {
+    this.display = true;
   }
 }
