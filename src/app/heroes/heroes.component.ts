@@ -43,6 +43,7 @@ export class HeroesComponent implements OnInit {
       this.heroService.addHero(this.modelo as Hero).subscribe((hero) => {
         this.heroes.push(hero);
       });
+      this.form.resetForm();
     }
   }
 

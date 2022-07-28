@@ -1,16 +1,12 @@
 <div class="text-center mt-4">
-  <p-dialog header="Title" [(visible)]="display"> Content </p-dialog>
-
-  <button
-    type="button"
-    (click)="showDialog()"
-    icon="pi pi-info-circle"
-    label="Show"
-  ></button>
-
   <h2>Mis Heroes</h2>
-  <div class="my-4 m-auto new-hero-box" [hidden]="submitted">
-    <form #heroForm="ngForm" (ngSubmit)="newHero()">
+  <p-dialog
+    header="Nuevo Héroe"
+    [(visible)]="display"
+    closeOnEscape="true"
+    [modal]="true"
+  >
+    <form #heroForm="ngForm" (ngSubmit)="newHero(); display = false">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -21,6 +17,7 @@
           [(ngModel)]="modelo.name"
           name="name"
           #name="ngModel"
+          autofocus
         />
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           El nombre es requerido
@@ -66,8 +63,17 @@
         Añadir
       </button>
     </form>
-  </div>
-  <div [hidden]="!submitted">
+  </p-dialog>
+  <button
+    pButton
+    type="button"
+    label="Añadir Héroe"
+    icon="pi pi-info-circle"
+    class="p-button-help"
+    (click)="showDialog()"
+  ></button>
+
+  <!-- <div [hidden]="!submitted">
     <h2>Ha añadido el siguiente héroe:</h2>
     <div class="row">
       <div class="col-xs-3">Nombre:</div>
@@ -89,7 +95,7 @@
     >
       Añadir otro
     </button>
-  </div>
+  </div> -->
 </div>
 <div class="container">
   <div class="row">
