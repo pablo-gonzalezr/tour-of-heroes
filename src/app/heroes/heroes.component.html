@@ -73,29 +73,26 @@
     (click)="showDialog()"
   ></button>
 
-  <!-- <div [hidden]="!submitted">
+  <div [hidden]="!submitted" class="mt-4">
     <h2>Ha añadido el siguiente héroe:</h2>
     <div class="row">
-      <div class="col-xs-3">Nombre:</div>
-      <div class="col-xs-9">{{ modelo.name }}</div>
+      <div class="col-xs-3">
+        Nombre: <span>{{ modelo.name }}</span>
+      </div>
     </div>
     <div class="row">
-      <div class="col-xs-3">Alter Ego:</div>
-      <div class="col-xs-9">{{ modelo.alterEgo }}</div>
+      <div class="col-xs-3">
+        Alter Ego: <span>{{ modelo.alterEgo }}</span>
+      </div>
     </div>
     <div class="row">
-      <div class="col-xs-3">Poder:</div>
-      <div class="col-xs-9">{{ modelo.power }}</div>
+      <div class="col-xs-3">
+        Poder: <span>{{ modelo.power }}</span>
+      </div>
     </div>
     <br />
-    <button
-      type="button"
-      class="btn btn-warning"
-      (click)="submitted = false; heroForm.reset()"
-    >
-      Añadir otro
-    </button>
-  </div> -->
+    <button class="btn btn-warning" (click)="submitted = false">Ocultar</button>
+  </div>
 </div>
 <div class="container">
   <div class="row">

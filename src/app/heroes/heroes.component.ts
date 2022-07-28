@@ -39,11 +39,11 @@ export class HeroesComponent implements OnInit {
     // if (!name || !alterEgo) {
     //   return;
     // }
+    console.log(this.modelo);
     if (this.form.valid) {
       this.heroService.addHero(this.modelo as Hero).subscribe((hero) => {
         this.heroes.push(hero);
       });
-      this.form.resetForm();
     }
   }
 
@@ -56,6 +56,7 @@ export class HeroesComponent implements OnInit {
   }
 
   showDialog() {
+    this.form.resetForm();
     this.display = true;
   }
 }
