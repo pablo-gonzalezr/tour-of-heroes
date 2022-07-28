@@ -9,11 +9,18 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesListComponent implements OnInit {
   heroes: Hero[] = [];
+  cols: any[];
 
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
     this.getHeroes();
+
+    this.cols = [
+      { field: 'name', header: 'Nombre' },
+      { field: 'alterEgo', header: 'Alter Ego' },
+      { field: 'power', header: 'Poder' },
+    ];
   }
 
   getHeroes(): void {

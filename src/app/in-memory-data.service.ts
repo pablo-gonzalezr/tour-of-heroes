@@ -69,6 +69,24 @@ export class InMemoryDataService implements InMemoryDbService {
         alterEgo: 'Pepsiman',
         power: 'Pepsi Ilimitada',
       },
+      {
+        id: 22,
+        name: 'Aquaman',
+        alterEgo: 'Persona',
+        power: 'Rey del mar',
+      },
+      {
+        id: 23,
+        name: 'Superman',
+        alterEgo: 'Clark Kent',
+        power: 'Super hombre',
+      },
+      {
+        id: 24,
+        name: 'Wonder Woman',
+        alterEgo: 'Princesa Diana',
+        power: 'Super mujer',
+      },
     ];
     const poderes = [
       'Super inteligente',

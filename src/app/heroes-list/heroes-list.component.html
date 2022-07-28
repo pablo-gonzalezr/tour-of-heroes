@@ -1,19 +1,30 @@
-<div class="my-4">
-  <h2 class="text-center mb-3">Lista de heroes:</h2>
-  <p-table [value]="heroes">
+<div class="mb-4">
+  <p-table
+    [columns]="cols"
+    [value]="heroes"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} heroes"
+    [rowsPerPageOptions]="[10, 25, 50]"
+  >
+    <ng-template pTemplate="caption"> Lista de Heroes </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Nombre</th>
-        <th>Alter Ego</th>
-        <th>Poder</th>
+        <th *ngFor="let column of cols">
+          {{ column.header }}
+        </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-hero>
+    <ng-template pTemplate="body" let-hero let-columns="columns">
       <tr>
-        <td>{{ hero.name }}</td>
-        <td>{{ hero.alterEgo }}</td>
-        <td>{{ hero.power }}</td>
+        <td *ngFor="let col of columns">
+          {{ hero[col.field] }}
+        </td>
       </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Hay en total {{ heroes?.length }} heroes
     </ng-template>
   </p-table>
 </div>
