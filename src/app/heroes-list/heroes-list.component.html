@@ -1,0 +1,19 @@
+<div class="my-4">
+  <h2 class="text-center mb-3">Lista de heroes:</h2>
+  <p-table [value]="heroes">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Alter Ego</th>
+        <th>Poder</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-hero>
+      <tr>
+        <td>{{ hero.name }}</td>
+        <td>{{ hero.alterEgo }}</td>
+        <td>{{ hero.power }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

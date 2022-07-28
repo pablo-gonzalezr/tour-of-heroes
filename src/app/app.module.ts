@@ -19,6 +19,8 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { HeroesListComponent } from './heroes-list/heroes-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ButtonModule } from 'primeng/button';
     DashboardComponent,
     HeroSearchComponent,
     NavbarComponent,
+    HeroesListComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { ButtonModule } from 'primeng/button';
     }),
     DialogModule,
     ButtonModule,
+    TableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
