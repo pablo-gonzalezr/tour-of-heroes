@@ -7,13 +7,30 @@
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} heroes"
     [rowsPerPageOptions]="[10, 25, 50]"
+    sortField="name"
+    #dt
   >
-    <ng-template pTemplate="caption"> Lista de Heroes </ng-template>
+    >
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between">
+        <span class="col"> Lista de Heroes</span>
+
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Buscar"
+          class="form-control col"
+        />
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let column of cols">
+        <th *ngFor="let column of cols" [pSortableColumn]="column.field">
           {{ column.header }}
+          <p-sortIcon field="{{ column.field }}"></p-sortIcon>
         </th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-hero let-columns="columns">
@@ -21,8 +38,24 @@
         <td *ngFor="let col of columns">
           {{ hero[col.field] }}
         </td>
+        <td>
+          <a
+            routerLink="/detail/{{ hero.id }}"
+            class="btn btn-outline-primary btn-detalle"
+          >
+            Detalles
+          </a>
+          <button
+            class="btn btn-danger"
+            title="delete hero"
+            (click)="delete(hero)"
+          >
+            Eliminar
+          </button>
+        </td>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="summary">
       Hay en total {{ heroes?.length }} heroes
     </ng-template>
